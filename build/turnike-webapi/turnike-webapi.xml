@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>turnike-webapi</name>
+    </assembly>
+    <members>
+        <member name="M:turnike_webapi.Controllers.EventController.GetStatus(System.String)">
+            <summary>
+            Durum sorgulama
+            </summary>
+            <param name="rfid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:turnike_webapi.Controllers.EventController.PostEnter(System.String)">
+            <summary>
+            Turnikeden içeri girerken
+            </summary>
+            <param name="rfid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:turnike_webapi.Controllers.EventController.PostLeave(System.String)">
+            <summary>
+            Turnikeden dışarı çıkarken
+            </summary>
+            <param name="rfid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:turnike_webapi.Controllers.HistoryController.Get(System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Geçmiş giriş çıkışlarını getirir
+            </summary>
+            <param name="userid">Kullanıcı id si eşit olanları filtreler</param>
+            <param name="rfid">Kullanıcı rfid si içinde geçenleri filtreler</param>
+            <param name="name">Kullanıcı adının içinde geçenleri filtreler</param>
+            <param name="mincreated">Giriş tarihinin başlayacağı zaman</param>
+            <param name="maxcreated">Giriş tarihinin biteceği zaman</param>
+            <param name="minrevoked">Çıkış tarihinin başlayacağı zaman</param>
+            <param name="maxrevoked">Çıkış tarihinin biteceği zaman</param>
+            <returns></returns>
+        </member>
+        <member name="M:turnike_webapi.Controllers.UserController.Get(System.Nullable{System.Int32},System.String,System.String)">
+            <summary>
+            Tüm kullanıcıları getirir
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:turnike_webapi.Controllers.UserController.Get(System.String)">
+            <summary>
+            Rfid filtrelemesi uygular
+            </summary>
+            <param name="rfid">Rfid kart numarası</param>
+            <returns></returns>
+        </member>
+        <member name="M:turnike_webapi.Controllers.UserController.Post(System.String,System.String)">
+            <summary>
+            Yeni kullanıcı kaydı
+            </summary>
+            <param name="rfid">Rfid kart numarası</param>
+            <param name="name">Kart sahibinin adı</param>
+            <returns></returns>
+        </member>
+        <member name="M:turnike_webapi.Controllers.UserController.Put(System.Int32,turnike_webapi.Rdbms.User)">
+            <summary>
+            Kullanıcı bilgileri güncelleme
+            </summary>
+            <param name="id"></param>
+            <param name="user"></param>
+        </member>
+    </members>
+</doc>

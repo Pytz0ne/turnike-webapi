@@ -1,0 +1,32 @@
+version: "3.3"
+services:
+  db:
+    image: postgres:13
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - db-data-turnike:/var/lib/postgresql/data
+      - ./build/db/:/docker-entrypoint-initdb.d/
+        
+  webapi:
+    build: build/turnike-webapi
+    depends_on:
+      - "db"
+    deploy:
+      mode: replicated
+    restart: unless-stopped
+
+  nginx:
+    image: nginx
+    depends_on:
+      - "webapi"
+    restart: unless-stopped
+    volumes:
+      - "./vol_nginx:/etc/nginx/conf.d"
+    ports:
+      - 80:80
+
+volumes:
+  db-data-turnike:

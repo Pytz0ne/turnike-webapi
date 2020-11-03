@@ -1,0 +1,50 @@
+version: "3"
+services:
+  db:
+    image: postgres:13
+    restart: on-failure
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+      - db-data-turnike:/var/lib/postgresql/data
+      - ./build/db/:/docker-entrypoint-initdb.d/
+        
+  webapi:
+    build: build/turnike-webapi
+    depends_on:
+      - "db"
+    restart: on-failure
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels: [APP=WEBAPI]
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 120s
+
+
+  nginx:
+    image: nginx
+    depends_on:
+      - "webapi"
+    restart: on-failure
+    volumes:
+      - "./vol_nginx:/etc/nginx/conf.d"
+    ports:
+      - 80:80
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  db-data-turnike:
