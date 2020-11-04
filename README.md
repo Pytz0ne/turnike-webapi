@@ -1,4 +1,4 @@
-Turnike WebApi Scaleable Service
+Turnike WebApi Scalable Service
 =========
 
 A simple distributed application running across multiple Docker containers.
